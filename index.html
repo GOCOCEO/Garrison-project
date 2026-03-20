@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Garrison Project | Building Resilience Through Jiu Jitsu</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { background: #1B2A4A; color: #F5F3EF; font-family: 'DM Sans', sans-serif; font-weight: 300; line-height: 1.65; overflow-x: hidden; }
+
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 1.25rem 4rem; border-bottom: 1px solid rgba(255,255,255,0.08); background: rgba(27,42,74,0.96); backdrop-filter: blur(12px); }
+  .nav-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.6rem; letter-spacing: 0.12em; color: #F5F3EF; text-decoration: none; }
+  .nav-logo span { color: #C9961A; }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a { font-family: 'DM Mono', monospace; font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: #c8c8c8; text-decoration: none; transition: color 0.2s; }
+  .nav-links a:hover { color: #C9961A; }
+  .nav-cta { font-family: 'DM Mono', monospace; font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase; color: #1B2A4A; background: #C9961A; border: none; padding: 0.65rem 1.5rem; cursor: pointer; text-decoration: none; transition: background 0.2s; }
+  .nav-cta:hover { background: #e0aa20; }
+
+  #home { min-height: 100vh; display: flex; align-items: flex-end; padding: 5rem 4rem 6rem; position: relative; overflow: hidden; background: #1B2A4A; }
+  .hero-bg { position: absolute; inset: 0; background: radial-gradient(ellipse 60% 50% at 70% 40%, rgba(201,150,26,0.10) 0%, transparent 70%), radial-gradient(ellipse 40% 60% at 20% 80%, rgba(201,150,26,0.05) 0%, transparent 60%), #1B2A4A; }
+  .hero-grid { position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px); background-size: 60px 60px; }
+  .hero-content { position: relative; z-index: 2; max-width: 900px; }
+  .hero-eyebrow { font-family: 'DM Mono', monospace; font-size: 0.72rem; letter-spacing: 0.25em; text-transform: uppercase; color: #C9961A; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 1rem; }
+  .hero-eyebrow::before { content: ''; display: block; width: 40px; height: 1px; background: #C9961A; }
+  .hero-headline { font-family: 'Bebas Neue', sans-serif; font-size: clamp(4rem, 9vw, 9rem); line-height: 0.92; letter-spacing: 0.02em; color: #F5F3EF; margin-bottom: 2rem; }
+  .hero-headline .accent-line { color: #C9961A; }
+  .hero-sub { font-size: 1.15rem; font-weight: 300; color: #c8c8c8; max-width: 540px; margin-bottom: 3rem; line-height: 1.7; }
+  .hero-actions { display: flex; gap: 1.25rem; align-items: center; }
+  .btn-primary { font-family: 'DM Mono', monospace; font-size: 0.75rem; letter-spacing: 0.18em; text-transform: uppercase; color: #1B2A4A; background: #C9961A; border: none; padding: 1rem 2.25rem; cursor: pointer; text-decoration: none; transition: background 0.2s; display: inline-block; font-weight: 700; }
+  .btn-primary:hover { background: #e0aa20; }
+  .btn-ghost { font-family: 'DM Mono', monospace; font-size: 0.75rem; letter-spacing: 0.18em; text-transform: uppercase; color: #c8c8c8; background: transparent; border: 1px solid rgba(255,255,255,0.25); padding: 1rem 2.25rem; cursor: pointer; text-decoration: none; transition: border-color 0.2s, color 0.2s; display: inline-block; }
+  .btn-ghost:hover { border-color: #C9961A; color: #C9961A; }
+  .hero-stat-strip { position: absolute; right: 4rem; bottom: 6rem; display: flex; flex-direction: column; gap: 2rem; z-index: 2; }
+  .hero-stat { text-align: right; }
+  .hero-stat-number { font-family: 'Bebas Neue', sans-serif; font-size: 2.8rem; color: #C9961A; line-height: 1; }
+  .hero-stat-label { font-family: 'DM Mono', monospace; font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.45); display: block; }
+
+  section { padding: 7rem 4rem; }
+  .section-label { font-family: 'DM Mono', monospace; font-size: 0.7rem; letter-spacing: 0.25em; text-transform: uppercase; color: #C9961A; margin-bottom: 1rem; display: flex; align-items: center; gap: 1rem; }
+  .section-label::before { content: ''; display: block; width: 32px; height: 1px; background: #C9961A; }
+  .section-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(3rem, 5vw, 5rem); line-height: 0.95; letter-spacing: 0.02em; color: #F5F3EF; margin-bottom: 1.5rem; }
+  .divider { border: none; border-top: 1px solid rgba(255,255,255,0.08); margin: 0; }
+
+  #about { background: #162238; }
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; margin-top: 3rem; }
+  .about-left p { font-size: 1.05rem; color: #c8c8c8; margin-bottom: 1.5rem; line-height: 1.75; }
+  .about-left p strong { color: #F5F3EF; font-weight: 500; }
+  .about-right { display: flex; flex-direction: column; gap: 0; }
+  .credential-item { display: flex; gap: 1.5rem; align-items: flex-start; padding: 1.75rem 0; border-bottom: 1px solid rgba(255,255,255,0.08); }
+  .credential-item:first-child { border-top: 1px solid rgba(255,255,255,0.08); }
+  .credential-num { font-family: 'Bebas Neue', sans-serif; font-size: 1.6rem; color: #C9961A; line-height: 1; flex-shrink: 0; width: 2.5rem; padding-top: 0.1rem; }
+  .credential-text strong { display: block; font-weight: 500; font-size: 0.95rem; color: #F5F3EF; margin-bottom: 0.25rem; }
+  .credential-text span { font-size: 0.85rem; color: rgba(255,255,255,0.5); line-height: 1.5; }
+
+  #program { background: #1B2A4A; }
+  .program-intro { max-width: 600px; font-size: 1.05rem; color: #c8c8c8; line-height: 1.75; margin-bottom: 4rem; }
+  .program-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border: 1px solid rgba(255,255,255,0.08); }
+  .program-card { padding: 2.75rem 2.25rem; border-right: 1px solid rgba(255,255,255,0.08); position: relative; transition: background 0.25s; }
+  .program-card:last-child { border-right: none; }
+  .program-card:hover { background: rgba(201,150,26,0.06); }
+  .program-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: #C9961A; transform: scaleX(0); transform-origin: left; transition: transform 0.3s; }
+  .program-card:hover::before { transform: scaleX(1); }
+  .program-icon { font-family: 'Bebas Neue', sans-serif; font-size: 3rem; color: #C9961A; line-height: 1; margin-bottom: 1.25rem; opacity: 0.7; }
+  .program-name { font-family: 'Bebas Neue', sans-serif; font-size: 1.6rem; letter-spacing: 0.04em; color: #F5F3EF; margin-bottom: 0.75rem; }
+  .program-desc { font-size: 0.9rem; color: rgba(255,255,255,0.5); line-height: 1.7; margin-bottom: 1.5rem; }
+  .program-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .tag { font-family: 'DM Mono', monospace; font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.45); border: 1px solid rgba(255,255,255,0.1); padding: 0.3rem 0.65rem; }
+
+  #values { background: #162238; position: relative; overflow: hidden; }
+  .values-accent-bg { position: absolute; top: -100px; right: -100px; width: 500px; height: 500px; border-radius: 50%; background: radial-gradient(circle, rgba(201,150,26,0.07) 0%, transparent 70%); pointer-events: none; }
+  .values-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center; position: relative; z-index: 1; }
+  .values-left p { font-size: 1.05rem; color: #c8c8c8; line-height: 1.75; margin-bottom: 1.5rem; }
+  .values-left p strong { color: #F5F3EF; font-weight: 500; }
+  .values-pill { display: inline-block; font-family: 'DM Mono', monospace; font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase; color: #C9961A; border: 1px solid #C9961A; padding: 0.4rem 1rem; margin-bottom: 1.5rem; }
+  .values-right { display: flex; flex-direction: column; gap: 0; }
+  .value-row { display: flex; align-items: flex-start; gap: 1.5rem; padding: 1.5rem 0; border-bottom: 1px solid rgba(255,255,255,0.08); }
+  .value-row:first-child { border-top: 1px solid rgba(255,255,255,0.08); }
+  .value-icon { width: 8px; height: 8px; background: #C9961A; flex-shrink: 0; margin-top: 0.55rem; }
+  .value-text strong { display: block; font-weight: 500; font-size: 0.95rem; color: #F5F3EF; margin-bottom: 0.2rem; }
+  .value-text span { font-size: 0.85rem; color: rgba(255,255,255,0.5); line-height: 1.5; }
+
+  #contact { background: #162238; }
+  .contact-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; margin-top: 3rem; }
+  .contact-left p { font-size: 1.05rem; color: #c8c8c8; line-height: 1.75; margin-bottom: 2rem; }
+  .contact-detail { display: flex; flex-direction: column; gap: 1.25rem; margin-bottom: 3rem; }
+  .contact-detail-item { display: flex; flex-direction: column; gap: 0.2rem; }
+  .contact-detail-label { font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: #C9961A; }
+  .contact-detail-value { font-size: 0.95rem; color: #c8c8c8; }
+  .contact-form { display: flex; flex-direction: column; gap: 1.25rem; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+  .form-group label { font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.45); }
+  .form-group input, .form-group select, .form-group textarea { background: #1B2A4A; border: 1px solid rgba(255,255,255,0.1); color: #F5F3EF; font-family: 'DM Sans', sans-serif; font-size: 0.95rem; padding: 0.85rem 1rem; outline: none; transition: border-color 0.2s; appearance: none; -webkit-appearance: none; }
+  .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: #C9961A; }
+  .form-group textarea { resize: vertical; min-height: 130px; }
+  .form-group input::placeholder, .form-group textarea::placeholder { color: rgba(255,255,255,0.25); }
+  .form-submit { font-family: 'DM Mono', monospace; font-size: 0.75rem; letter-spacing: 0.18em; text-transform: uppercase; color: #1B2A4A; background: #C9961A; border: none; padding: 1.1rem 2.5rem; cursor: pointer; align-self: flex-start; transition: background 0.2s; font-weight: 700; }
+  .form-submit:hover { background: #e0aa20; }
+
+  footer { background: #111d33; border-top: 1px solid rgba(255,255,255,0.08); padding: 2.5rem 4rem; display: flex; align-items: center; justify-content: space-between; }
+  .footer-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.4rem; letter-spacing: 0.12em; color: #F5F3EF; }
+  .footer-logo span { color: #C9961A; }
+  .footer-copy { font-family: 'DM Mono', monospace; font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.3); }
+  .footer-links { display: flex; gap: 2rem; list-style: none; }
+  .footer-links a { font-family: 'DM Mono', monospace; font-size: 0.62rem; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(255,255,255,0.45); text-decoration: none; transition: color 0.2s; }
+  .footer-links a:hover { color: #C9961A; }
+
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+  .hero-eyebrow { animation: fadeUp 0.7s ease both; animation-delay: 0.1s; }
+  .hero-headline { animation: fadeUp 0.7s ease both; animation-delay: 0.25s; }
+  .hero-sub { animation: fadeUp 0.7s ease both; animation-delay: 0.4s; }
+  .hero-actions { animation: fadeUp 0.7s ease both; animation-delay: 0.55s; }
+
+  @media (max-width: 900px) {
+    nav { padding: 1.25rem 2rem; }
+    .nav-links { display: none; }
+    section { padding: 5rem 2rem; }
+    #home { padding: 8rem 2rem 4rem; min-height: auto; }
+    .about-grid, .values-layout, .contact-layout { grid-template-columns: 1fr; gap: 3rem; }
+    .program-grid { grid-template-columns: 1fr; }
+    .program-card { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.08); }
+    .hero-stat-strip { display: none; }
+    footer { flex-direction: column; gap: 1.5rem; text-align: center; }
+    .form-row { grid-template-columns: 1fr; }
+    .hero-headline { font-size: clamp(3rem, 14vw, 5rem); }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#home" class="nav-logo">The <span>Garrison</span> Project</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#program">Program</a></li>
+    <li><a href="#values">Values</a></li>
+    <li><a href="#contact">Get Involved</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Get Involved</a>
+</nav>
+
+<section id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">The Garrison Project - San Diego, CA</div>
+    <h1 class="hero-headline">
+      Built on the<br>
+      <span class="accent-line">Mat.</span><br>
+      Proven in Life.
+    </h1>
+    <p class="hero-sub">
+      A free mentorship program for fatherless boys ages 12-17. Discipline, confidence, and resilience through Brazilian Jiu Jitsu, guided mentorship, and structured life skills training.
+    </p>
+    <div class="hero-actions">
+      <a href="#program" class="btn-primary">See the Program</a>
+      <a href="#about" class="btn-ghost">About Us</a>
+    </div>
+  </div>
+  <div class="hero-stat-strip">
+    <div class="hero-stat">
+      <div class="hero-stat-number">12-17</div>
+      <span class="hero-stat-label">Ages<br>Served</span>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-number">FREE</div>
+      <span class="hero-stat-label">Cost to<br>Participants</span>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-number">BJJ</div>
+      <span class="hero-stat-label">Core<br>Methodology</span>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<section id="about">
+  <div class="section-label">About</div>
+  <h2 class="section-title">Challenge<br>Over Comfort.</h2>
+  <div class="about-grid">
+    <div class="about-left">
+      <p>The Garrison Project is built on one belief: <strong>boys are more capable than the system around them gives them credit for.</strong> The best thing you can do for a young man is challenge him - not protect him from difficulty.</p>
+      <p>The program is free. The work is not. Boys earn their place here through attendance, effort, and accountability. The mat teaches leverage - how to accept a bad position and work from it. How to stay composed when things are hard. How to lead when everyone around you is folding.</p>
+      <p>On top of the Jiu Jitsu, students work on <strong>practical life skills</strong> - getting an ID, filling out a job application, writing a resume, mock interviews, and college applications. None of this is abstract. All of it matters when they turn 18.</p>
+      <p>Founded by Angelo Coates and Eder Gomez. San Diego, California. A nonprofit initiative operating under GoCo Dynamics LLC.</p>
+    </div>
+    <div class="about-right">
+      <div class="credential-item">
+        <div class="credential-num">01</div>
+        <div class="credential-text">
+          <strong>Free to Participants</strong>
+          <span>No cost to the boys or their families. The program is funded through grants, donations, and GoCo Dynamics training revenue.</span>
+        </div>
+      </div>
+      <div class="credential-item">
+        <div class="credential-num">02</div>
+        <div class="credential-text">
+          <strong>Jiu Jitsu as the Foundation</strong>
+          <span>BJJ teaches leverage, control, and working from bad positions. The mat delivers what a counseling room can only describe.</span>
+        </div>
+      </div>
+      <div class="credential-item">
+        <div class="credential-num">03</div>
+        <div class="credential-text">
+          <strong>Male-Specific Design</strong>
+          <span>Built specifically for boys by men who understand what they are missing. Gender specificity is not incidental - it is the point.</span>
+        </div>
+      </div>
+      <div class="credential-item">
+        <div class="credential-num">04</div>
+        <div class="credential-text">
+          <strong>Measured by Results</strong>
+          <span>Grade improvement, school attendance, program retention, life skills completion. Not by how often a student expresses his feelings.</span>
+        </div>
+      </div>
+      <div class="credential-item">
+        <div class="credential-num">05</div>
+        <div class="credential-text">
+          <strong>Co-Founded by Angelo Coates and Eder Gomez</strong>
+          <span>MSW candidate, BJJ practitioner, and youth program veteran. Built from field experience, not theory.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<section id="program">
+  <div class="section-label">Program</div>
+  <h2 class="section-title">What We<br>Actually Do.</h2>
+  <p class="program-intro">Five steps. No shortcuts. Boys enter as students and leave as leaders - or they come back until they do.</p>
+  <div class="program-grid">
+    <div class="program-card">
+      <div class="program-icon">01</div>
+      <div class="program-name">Intake and Relationship</div>
+      <p class="program-desc">Earn trust before asking for anything. No boy opens up to someone he does not respect. Presence and consistency come first.</p>
+      <div class="program-tags">
+        <span class="tag">Trust-first</span>
+        <span class="tag">No pressure</span>
+      </div>
+    </div>
+    <div class="program-card">
+      <div class="program-icon">02</div>
+      <div class="program-name">Jiu Jitsu Mentorship</div>
+      <p class="program-desc">Technique, discipline, and resilience on the mat. Uniforms are earned, not handed out. The physical challenge is the point.</p>
+      <div class="program-tags">
+        <span class="tag">BJJ training</span>
+        <span class="tag">Earned uniforms</span>
+        <span class="tag">Weekly sessions</span>
+      </div>
+    </div>
+    <div class="program-card">
+      <div class="program-icon">03</div>
+      <div class="program-name">Life Skills Sessions</div>
+      <p class="program-desc">Resume writing. Mock interviews. College applications. Getting an ID. The practical tools schools skip and fathers often provide.</p>
+      <div class="program-tags">
+        <span class="tag">Resume and interview</span>
+        <span class="tag">College readiness</span>
+        <span class="tag">Real documents</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<section id="values">
+  <div class="values-accent-bg"></div>
+  <div class="values-layout">
+    <div class="values-left">
+      <div class="values-pill">Core Values</div>
+      <div class="section-label">What We Stand On</div>
+      <h2 class="section-title">Results,<br>Not Rhetoric.</h2>
+      <p>The Garrison Project does not measure success by feelings expressed in a session. It measures success by what a young man actually does.</p>
+      <p><strong>A grade going from D to B is proof of concept.</strong> Attendance is proof of commitment. A completed job application is proof of capability. That is the standard.</p>
+      <p>No funder, partner, or ideology rewrites the program methodology. The mission stays the mission.</p>
+      <a href="#contact" class="btn-primary" style="margin-top: 0.5rem;">Partner With Us</a>
+    </div>
+    <div class="values-right">
+      <div class="value-row">
+        <div class="value-icon"></div>
+        <div class="value-text">
+          <strong>Proactive Over Reactive</strong>
+          <span>We build capacity before the crisis. Not after the diagnosis, not after the arrest. Before.</span>
+        </div>
+      </div>
+      <div class="value-row">
+        <div class="value-icon"></div>
+        <div class="value-text">
+          <strong>Challenge Over Comfort</strong>
+          <span>Growth happens on the mat, not in a circle. Boys need to be pushed, not protected from difficulty.</span>
+        </div>
+      </div>
+      <div class="value-row">
+        <div class="value-icon"></div>
+        <div class="value-text">
+          <strong>Results Over Rhetoric</strong>
+          <span>Report cards. Attendance logs. Completed applications. Data that speaks louder than any equity statement.</span>
+        </div>
+      </div>
+      <div class="value-row">
+        <div class="value-icon"></div>
+        <div class="value-text">
+          <strong>Accountability</strong>
+          <span>We own our failures and build on our wins. Same standard applies to every student, every staff member, every partner.</span>
+        </div>
+      </div>
+      <div class="value-row">
+        <div class="value-icon"></div>
+        <div class="value-text">
+          <strong>Mission Integrity</strong>
+          <span>No funder, partner, or ideology rewrites the program. The methodology is not negotiable.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<section id="contact">
+  <div class="section-label">Get Involved</div>
+  <h2 class="section-title">Be Part<br>of This.</h2>
+  <div class="contact-layout">
+    <div class="contact-left">
+      <p>Looking to refer a young man to the program? Want to partner with the Garrison Project as a school, agency, or funder? Interested in volunteering? Reach out directly.</p>
+      <div class="contact-detail">
+        <div class="contact-detail-item">
+          <span class="contact-detail-label">Location</span>
+          <span class="contact-detail-value">San Diego, California</span>
+        </div>
+        <div class="contact-detail-item">
+          <span class="contact-detail-label">Website</span>
+          <span class="contact-detail-value">garrisonproject.org</span>
+        </div>
+        <div class="contact-detail-item">
+          <span class="contact-detail-label">Co-Founders</span>
+          <span class="contact-detail-value">Angelo Coates and Eder Gomez</span>
+        </div>
+        <div class="contact-detail-item">
+          <span class="contact-detail-label">Email</span>
+          <span class="contact-detail-value">angelocoates@yahoo.com</span>
+        </div>
+      </div>
+      <p style="font-size: 0.88rem; color: rgba(255,255,255,0.4); line-height: 1.65;">The Garrison Project is a nonprofit initiative. Volunteers must complete a Live Scan background check, Mandated Reporter training, and program orientation before working with youth.</p>
+    </div>
+    <div>
+      <form class="contact-form" onsubmit="handleSubmit(event)">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="fname">Full Name</label>
+            <input type="text" id="fname" placeholder="Your name" required>
+          </div>
+          <div class="form-group">
+            <label for="org">Organization</label>
+            <input type="text" id="org" placeholder="School, agency, or none">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="femail">Email Address</label>
+          <input type="email" id="femail" placeholder="your@email.com" required>
+        </div>
+        <div class="form-group">
+          <label for="interest">I want to</label>
+          <select id="interest">
+            <option value="" disabled selected>Select an option</option>
+            <option>Refer a young man to the program</option>
+            <option>Volunteer or mentor</option>
+            <option>Partner as a school or agency</option>
+            <option>Support as a funder or donor</option>
+            <option>Learn more about the program</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="message">Message</label>
+          <textarea id="message" placeholder="Tell us about your interest and how you want to get involved."></textarea>
+        </div>
+        <button type="submit" class="form-submit">Send Message</button>
+        <div id="form-confirm" style="display:none; font-family: DM Mono, monospace; font-size: 0.75rem; letter-spacing: 0.12em; color: #C9961A; padding-top: 0.5rem;">
+          Message received. We will be in touch shortly.
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">The <span>Garrison</span> Project</div>
+  <ul class="footer-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#program">Program</a></li>
+    <li><a href="#values">Values</a></li>
+    <li><a href="#contact">Get Involved</a></li>
+  </ul>
+  <div class="footer-copy">2026 The Garrison Project - GoCo Dynamics LLC - San Diego, CA</div>
+</footer>
+
+<script>
+  function handleSubmit(e) {
+    e.preventDefault();
+    var name = document.getElementById('fname').value;
+    var org = document.getElementById('org').value;
+    var email = document.getElementById('femail').value;
+    var interest = document.getElementById('interest').value;
+    var message = document.getElementById('message').value;
+    var subject = encodeURIComponent('Garrison Project Inquiry: ' + (interest || 'General'));
+    var body = encodeURIComponent('Name: ' + name + '\nOrganization: ' + org + '\nEmail: ' + email + '\nInterest: ' + interest + '\n\nMessage:\n' + message);
+    window.location.href = 'mailto:angelocoates@yahoo.com?subject=' + subject + '&body=' + body;
+    document.getElementById('form-confirm').style.display = 'block';
+    e.target.reset();
+  }
+  window.addEventListener('scroll', function() {
+    var nav = document.querySelector('nav');
+    if (window.scrollY > 60) {
+      nav.style.padding = '0.85rem 4rem';
+    } else {
+      nav.style.padding = '1.25rem 4rem';
+    }
+  });
+</script>
+</body>
+</html>
