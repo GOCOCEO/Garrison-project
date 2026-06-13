@@ -68,6 +68,8 @@
   .program-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border: 1px solid rgba(255,255,255,0.08); }
   .program-card { padding: 2.75rem 2.25rem; border-right: 1px solid rgba(255,255,255,0.08); position: relative; transition: background 0.25s; }
   .program-card:last-child { border-right: none; }
+  .program-card { border-bottom: 1px solid rgba(255,255,255,0.08); }
+  .program-card:nth-child(3n) { border-right: none; }
   .program-card:hover { background: rgba(201,150,26,0.06); }
   .program-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: #C9961A; transform: scaleX(0); transform-origin: left; transition: transform 0.3s; }
   .program-card:hover::before { transform: scaleX(1); }
@@ -270,6 +272,24 @@
         <span class="tag">Resume and interview</span>
         <span class="tag">College readiness</span>
         <span class="tag">Real documents</span>
+      </div>
+    </div>
+    <div class="program-card">
+      <div class="program-icon">04</div>
+      <div class="program-name">Community Workshops</div>
+      <p class="program-desc">Exposure to professionals and real career pathways. Students meet people doing the work - trades, business, public service - and see what is actually possible.</p>
+      <div class="program-tags">
+        <span class="tag">Career exposure</span>
+        <span class="tag">Real professionals</span>
+      </div>
+    </div>
+    <div class="program-card">
+      <div class="program-icon">05</div>
+      <div class="program-name">Mentor Pathway</div>
+      <p class="program-desc">Graduates step into junior mentor roles - leading warm-ups, modeling the code of conduct, and guiding the next cohort. Students become part of the solution.</p>
+      <div class="program-tags">
+        <span class="tag">Junior mentor</span>
+        <span class="tag">Leadership earned</span>
       </div>
     </div>
   </div>
